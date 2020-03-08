@@ -1,16 +1,17 @@
 package stormapplied.githubcommits.topology;
 
-import backtype.storm.Config;
-import backtype.storm.ILocalCluster;
-import backtype.storm.Testing;
-import backtype.storm.generated.StormTopology;
-import backtype.storm.testing.CompleteTopologyParam;
-import backtype.storm.testing.MkClusterParam;
-import backtype.storm.testing.MockedSources;
-import backtype.storm.testing.TestJob;
-import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Values;
+import org.apache.storm.Config;
+import org.apache.storm.ILocalCluster;
+import org.apache.storm.Testing;
+import org.apache.storm.generated.StormTopology;
+import org.apache.storm.testing.CompleteTopologyParam;
+import org.apache.storm.testing.MkClusterParam;
+import org.apache.storm.testing.MockedSources;
+import org.apache.storm.testing.TestJob;
+import org.apache.storm.thrift.TException;
+import org.apache.storm.topology.TopologyBuilder;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.tuple.Values;
 import org.junit.Test;
 
 import java.util.Map;
@@ -29,7 +30,7 @@ public class TopologyTest {
 
     Testing.withSimulatedTimeLocalCluster(clusterParam, new TestJob() {
       @Override
-      public void run(ILocalCluster cluster) {
+      public void run(ILocalCluster cluster) throws TException, InterruptedException {
         MockedSources mockedSources = new MockedSources();
         mockedSources.addMockData("commit-feed-listener", new Values("12345 test@manning.com"));
 
