@@ -8,6 +8,7 @@ import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Values;
 import org.apache.commons.io.IOUtils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -35,8 +36,10 @@ public class CommitFeedListener extends BaseRichSpout {
     this.outputCollector = outputCollector;
 
     try {
-      commits = IOUtils.readLines(ClassLoader.getSystemResourceAsStream("changelog.txt"),
-                                  Charset.defaultCharset().name());
+      //commits = IOUtils.readLines(ClassLoader.getSystemResourceAsStream("changelog.txt"),
+      //                            Charset.defaultCharset().name());
+
+      commits = IOUtils.readLines(new FileInputStream("/Users/maming/Documents/work/github/C2-Github-commit-count/src/main/resources/changelog.txt"), Charset.defaultCharset().name());
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

@@ -33,28 +33,29 @@ public class LocalTopologyRunner {
     //为拓扑定义配置
     Map conf = new HashMap();
     //为拓扑配置工作进程数
-    conf.put(Config.TOPOLOGY_WORKERS, 4);
+    conf.put(Config.TOPOLOGY_WORKERS, 1);
 
     StormTopology topology = builder.createTopology();
 
 
     //start 本地测试
-    /*// 创建本地集群(new 这个类即可)
-    conf.put(Config.TOPOLOGY_DEBUG, true);// 打开DEBUG模式
+    // 创建本地集群(new 这个类即可)
+    // 打开DEBUG模式
+    conf.put(Config.TOPOLOGY_DEBUG, false);
     LocalCluster cluster = new LocalCluster();
 
     cluster.submitTopology("github-commit-count-topology",
         conf,
         topology);
     //向本地集群提交拓扑
-    Utils.sleep(TEN_MINUTES);
+    //Utils.sleep(TEN_MINUTES);
     //停止拓扑
-    cluster.killTopology("github-commit-count-topology");
+    //cluster.killTopology("github-commit-count-topology");
     //关闭集群
-    cluster.shutdown();*/
+    //cluster.shutdown();
     //end 本地测试
 
     //提交拓扑到生产
-    StormSubmitter.submitTopology("github-commit-count-topology", conf, topology);
+    //StormSubmitter.submitTopology("github-commit-count-topology", conf, topology);
   }
 }
